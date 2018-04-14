@@ -1,0 +1,2 @@
+model_checkpoint_path: "model-softmax_cross_entropy_v2"
+all_model_checkpoint_paths: "model-softmax_cross_entropy_v2"
