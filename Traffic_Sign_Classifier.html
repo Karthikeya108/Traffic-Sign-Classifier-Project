@@ -13228,12 +13228,13 @@ a = np.array([[ 0.24879643,  0.07032244,  0.12641572,  0.34763842,  0.07893497,
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[94]:</div>
+<div class="prompt input_prompt">In&nbsp;[118]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
     <span class="n">saver</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">latest_checkpoint</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">ext_images</span><span class="p">})</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">logits</span><span class="p">)</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">ext_images</span><span class="p">})</span>
+    <span class="c1">#a = sess.run(logits, feed_dict={x: ext_images})</span>
     <span class="n">top5</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">top_k</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">top5</span><span class="p">)</span>
 </pre></div>
@@ -13253,14 +13254,19 @@ a = np.array([[ 0.24879643,  0.07032244,  0.12641572,  0.34763842,  0.07893497,
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>INFO:tensorflow:Restoring parameters from ./model-softmax_cross_entropy_v2
-TopKV2(values=array([[ 60.487335 ,   7.5555773,   1.8072625,   0.7599088,  -0.534016 ],
-       [158.178    ,  23.431557 ,  20.171286 ,  19.143156 ,  14.989538 ],
-       [ 55.96152  ,  24.755127 ,  23.519688 ,  19.113995 ,  15.122518 ],
-       [ 25.446056 ,  18.33754  ,  13.789451 ,  10.975286 ,   4.799643 ],
-       [ 12.713218 ,   6.2310634,   3.5401902,   2.1719484,   2.0402129],
-       [ 17.161827 ,  17.03953  ,  11.170205 ,   3.853657 ,   2.8105915]],
-      dtype=float32), indices=array([[14,  3, 37,  7, 38],
-       [17, 36, 29, 20, 33],
+TopKV2(values=array([[1.0000000e+00, 1.0280854e-23, 3.2776924e-26, 1.1500297e-26,
+        3.1532908e-27],
+       [1.0000000e+00, 0.0000000e+00, 0.0000000e+00, 0.0000000e+00,
+        0.0000000e+00],
+       [1.0000000e+00, 2.8004974e-14, 8.1412436e-15, 9.9385387e-17,
+        1.8358860e-18],
+       [9.9917334e-01, 8.1743131e-04, 8.6544860e-06, 5.1887758e-07,
+        1.0789897e-09],
+       [9.9827611e-01, 1.5278712e-03, 1.0362288e-04, 2.6377618e-05,
+        2.3121895e-05],
+       [5.2983296e-01, 4.6884134e-01, 1.3243739e-03, 8.7998245e-07,
+        3.1008204e-07]], dtype=float32), indices=array([[14,  3, 37,  7, 38],
+       [17,  0,  1,  2,  3],
        [25, 11, 30, 24, 28],
        [25, 20, 24, 18, 37],
        [37, 30, 11,  3, 10],
