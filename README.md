@@ -138,34 +138,77 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| No Entry    			| No Entry 										|
-| Road Work				| Road Work											|
-| Pedestrians      		| Road Work					 				|
+| Stop      		| Stop   									| 
+| No entry    			| No entry 										|
+| Road work				| Road work											|
+| Pedestrian      		| Road work					 				|
 | Turn right ahead		| Go straight or left      							|
-| Speed limit (120 km/h)		| Turn left shead     							|
+| Speed limit (120 km/h)		| Turn left ahead     							|
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess 3 of the 6 traffic signs, which gives an accuracy of 50 %. This means that the model did not generalize well for the new dataset. Especially for the images with more background area. In other words, the external images were from a different distribution than the one that we used to train and validate the model. 
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
 The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+For the first image, the model is pretty sure that this is a 'Stop' sign (probability of 1.0), and the image does contain a 'Stop' sign. The top five soft max probabilities were
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+| 1.0         			| Stop   									| 
+| 1.02e-23    				| Speed limit (60 km/h) 										|
+| 3.27e-26					| Go straight or left									|
+| 3.15e-26      			| Speed limit (100 km/h)					 				|
+| 3.15e-27				    | Keep right      							|
 
+For the second image also, the model is pretty sure that this is a 'No entry' (probability of 1.0), and the image does contain a 'No entry' sign. The top five soft max probabilities were
 
-For the second image ... 
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| 1.0         			| No entry   									| 
+| 0    				| Go straight or right									|
+| 0					| Pedestrians								|
+| 0      			| Dangerous curve to the right					 				|
+| 0				    | Turn right ahead      							|
 
-### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
-#### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
+And again for the third image also, the model is pretty sure that this is a 'Road work' (probability of 1.0), and the image does contain a 'Road work' sign. The top five soft max probabilities were
 
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| 1.0         			| Road work  									| 
+| 2.8e-14    				| Right-of-way at the next intersection									|
+| 8.14e-15					| Beware of ice/snow							|
+| 9.9e-17      			| Road narrows on the right					 				|
+| 1.8e-18				    | Traffic signals      							|
 
+The fourth image was misclassified. The model was confident that the sign was 'Road work' but the image was of 'Pedestrian'. The top five soft max probabilities were
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| 9.9e-01         			| Road work  									| 
+| 8.17e-04    				| Dangerous curve to the right									|
+| 8.65e-06					| Bumpy road							|
+| 5.18e-07      			| General caution					 				|
+| 1.07e-09			    | Go straight or left     							|
+
+ The fifth image was also misclasified. The model was confident that the sign was 'Go straight or left' but the image was of 'Turn right ahead'. The top five soft max probabilities were
+ 
+ 
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| 9.9e-01         			| Go straight or left   									| 
+| 1.52e-03    				| Children crossing									|
+| 1.03e-04					| Right-of-way at the next intersection							|
+| 2.6e-05      			| Speed limit (60km/h)				 				|
+| 2.3e-05			    | Speed limit (120km/h) 							|
+
+The fifth image was also misclasified. The model was not certain but predicted the sign to be 'End of all speed and passing limits' but the image was of 'Speed limit (120 km/h)'. The top five soft max probabilities were
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| 5.2e-01        			| Turn left ahead  									| 
+| 4.6e-01    				| Right-of-way at the next intersection							|
+| 1.3e-03					| Speed limit (60km/h)						|
+| 8.7e-07     			| Pedestrians			 				|
+| 3.1e-07			    | No passing for vehicles over 3.5 metric tons							|
